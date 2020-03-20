@@ -4,7 +4,7 @@ import { sum } from 'd3';
 export function processData() {
   let dataToUse = [];
   data.forEach(d => {
-    if (+d.total > 100000 && d.annual_median_wage < 160000){
+    if (+d.total > 100000 && d.annual_median_wage < 160000 ){
       let bin = Math.floor(d.proximityScore / 25);
       dataToUse.push({
         job: d.occupationTitle,
