@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-const copyURL = 'https://www.politico.com/interactives/apps/kitchensink/153EdF-DElB/data.json';
+const copyURL = 'https://www.politico.com/interactives/apps/kitchensink/1MtcWgiB3g4P/data.json';
 
 fetch(copyURL)
   .then(d => d.json())

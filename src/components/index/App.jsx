@@ -9,6 +9,9 @@ import 'Theme/base.scss';
 
 import { processData } from './utils/processData';
 
+import Scatterplot from './Scatterplot';
+import Table from './Table';
+
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -33,6 +36,9 @@ class App extends React.Component {
         <Dek>{copy.Dek}</Dek>
         <Info {...meta} updated={timestamp} />
 
+        <h3 className='main-sub'> {copy.ScatterplotHed} </h3>
+        <p className='main-dek'> {copy.ScatterplotDek} </p>
+        <Scatterplot data={data} />
         <Markdown source={copy.Intro} className='body' linkTarget='_blank' />
 
         <Ad.Dynamic />
@@ -40,11 +46,13 @@ class App extends React.Component {
         <h3 className='main-sub'> {copy.BarsHed} </h3>
         <p className='main-dek'> {copy.BarsDek} </p>
 
+        <Table data={data.filter(a => a.income < 60000 && a.proximity > 75)} />
+        <Markdown source={copy.DangerZoneCopy} className='body' linkTarget='_blank' />
 
         <Ad.Dynamic />
 
-        <h3 className='main-sub'> {copy.TrendsHed} </h3>
-        <p className='main-dek'> {copy.TrendsDek} </p>
+        <h3 className='main-sub'> {copy.DemographicsHed} </h3>
+        <p className='main-dek'> {copy.DemographicsDek} </p>
 
 
         <Markdown source={copy.Methodology} className='methodology' linkTarget='_blank' />
