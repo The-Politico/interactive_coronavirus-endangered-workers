@@ -34,7 +34,7 @@ class App extends React.Component {
         <Section href={content.section.link}>{content.section.name}</Section>
         <Headline>{copy.Hed}</Headline>
         <Dek>{copy.Dek}</Dek>
-        <Info {...meta} updated={timestamp} />
+        <Info {...meta} />
 
         <Markdown source={copy.Intro} className='body' linkTarget='_blank' />
 
