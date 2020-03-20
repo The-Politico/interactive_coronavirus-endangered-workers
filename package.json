@@ -1,0 +1,49 @@
+{
+  "name": "interactive_coronavirus-endangered-workers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "pib": {
+    "template": "dynamic",
+    "id": "eYDr3VIo",
+    "pageName": "coronavirus-endangered-workers",
+    "siteSection": "politics",
+    "pageType": "interactives",
+    "adUnitSection": "politics",
+    "freePaidContent": "free",
+    "opinion": false,
+    "site": "core",
+    "publishPath": "interactives/2020/coronavirus-endangered-workers/",
+    "published": null,
+    "updated": null,
+    "authors": [
+      {
+        "link": "https://www.politico.com/",
+        "name": "Polly Politico"
+      }
+    ]
+  },
+  "dependencies": {
+    "@politico/graphics-kit": "^1.0.3",
+    "@politico/interactive-style": "1.6.1",
+    "d3": "^5.15.0",
+    "politico-style": "3.0.16",
+    "react": "16.6.3",
+    "react-helmet": "5.2.1",
+    "react-markdown": "4.1.0"
+  },
+  "devDependencies": {
+    "@politico/eslint-config-interactives": "latest",
+    "@politico/interactive-bin": "0.1.14",
+    "eslint": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pib start",
+    "build": "pib build",
+    "preview": "pib preview",
+    "api": "pib api",
+    "pub": "pib publish",
+    "new": "pib new"
+  }
+}
