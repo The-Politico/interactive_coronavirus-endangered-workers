@@ -38,13 +38,29 @@
       }
     }
     circle.data-point {
-      fill-opacity: .5;
       cursor: pointer;
       @include fill;
       @include stroke;
-      stroke-width: 1px;
+      stroke-width: .5px;
+      fill-opacity: .3;
       &.selected {
         stroke: black;
+        stroke-width: 3px;
+        fill-opacity: .5;
+      }
+      &.annotated-true {
+        stroke-width: 3px;
+        fill-opacity: .5;
+      }
+    }
+    text.data-point {
+      text-anchor: middle;
+      dominant-baseline: baseline;
+      font-family: $din;
+      font-size: .8rem;
+      font-weight: bold;
+      &.shadow {
+        stroke: rgba(255, 255, 255, .8);
         stroke-width: 2px;
       }
     }

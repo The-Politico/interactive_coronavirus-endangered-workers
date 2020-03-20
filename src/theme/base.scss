@@ -1,4 +1,5 @@
 @import '~@politico/interactive-style/theme.scss';
+@import 'Theme/mixins.scss';
 
 div.share {
   margin-bottom: 5px;
@@ -82,3 +83,32 @@ div.methodology {
      padding: 0px 10px;
    }
  }
+
+ div.map-key {
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+  justify: space-between;
+  @media screen and (max-width: 600px){
+    max-width: 290px;
+    margin-bottom: 16px;
+  }
+  p {
+    font-family: $din;
+    font-size: .9rem;
+    margin-bottom: 0;
+    @media screen and (max-width: 600px){
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 4px;
+      border-radius: 10px;
+      @include background-color;
+    }
+  }
+
+}

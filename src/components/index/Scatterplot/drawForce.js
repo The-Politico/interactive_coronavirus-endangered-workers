@@ -1,6 +1,7 @@
 import { BaseChart, d3 } from '@politico/graphics-kit';
 import ReactDOM from 'react-dom';
 import Tooltip from './Tooltip';
+import { wrap } from './../utils/wrap.js';
 
 class Chart extends BaseChart {
   draw() {
@@ -9,6 +10,9 @@ class Chart extends BaseChart {
     // console.log('national', data)
     const div = this.selection().appendSelect('div', 'container');
     const tooltip = div.appendSelect('div', 'tooltip');
+    const key = div.appendSelect('div', 'map-key')
+          .html(`<p><span class='bin-1'></span> Workers who are economically more stable </p>
+          <p><span class='bin-3'></span> Workers in economic danger</p>`)
 
     const frameW = 1000;
     const width = div._groups[0][0].offsetWidth;
@@ -72,11 +76,37 @@ class Chart extends BaseChart {
     jobs
       .enter()
       .append('circle')
-      .attr('class', d => `data-point ${d.id} bin-${d.bin}`)
+      .attr('class', d => `data-point id-${d.id} bin-${d.bin} annotated-${d.annotate}`)
       .merge(jobs)
       .attr('cx', d => xScale(d.proximity))
       .attr('cy', d => yScale(d.income))
       .attr('r', d => Math.sqrt(d.population) / m)
+
+    const titleShadow = svg.selectAll('text.shadow')
+      .data(data.filter(a => a.annotate))
+
+    titleShadow
+      .enter()
+      .append('text')
+      .attr('class', d => `data-point shadow id-${d.id} bin-${d.bin}`)
+      .merge(titleShadow)
+      .attr('x', d => xScale(d.proximity))
+      .attr('y', d => yScale(d.income) - Math.sqrt(d.population) / m - 5)
+      .text(d => d.job.split(', ')[0])
+      .call(wrap, 100)
+
+    const titles = svg.selectAll('text.top-layer')
+      .data(data.filter(a => a.annotate))
+
+    titles
+      .enter()
+      .append('text')
+      .attr('class', d => `top-layer data-point id-${d.id} bin-${d.bin}`)
+      .merge(titles)
+      .attr('x', d => xScale(d.proximity))
+      .attr('y', d => yScale(d.income) - Math.sqrt(d.population) / m - 5)
+      .text(d => d.job.split(', ')[0])
+      .call(wrap, 100)
 
 
     svg.selectAll('circle.data-point').on('mousemove', d => {
@@ -99,9 +129,14 @@ class Chart extends BaseChart {
        tooltip.attr('style', `${xStyle}${yStyle}`)
          .classed('visible', true);
 
+        svg.selectAll('circle.id-' + d.id)
+          .classed('selected', true)
        // Show data
      }).on('mouseleave', () => {
        tooltip.classed('visible', false);
+
+       svg.selectAll('circle')
+         .classed('selected', false)
      });
 
 
