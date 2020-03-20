@@ -90,13 +90,15 @@ div.methodology {
   margin: 0 auto;
   justify: space-between;
   @media screen and (max-width: 600px){
-    max-width: 290px;
+    width: 100%;
     margin-bottom: 16px;
+    justify: center;
   }
   p {
     font-family: $din;
     font-size: .9rem;
     margin-bottom: 0;
+    line-height: 1.2;
     @media screen and (max-width: 600px){
       margin-top: 0;
       margin-bottom: 8px;

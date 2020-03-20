@@ -12,7 +12,7 @@ export function processData() {
         id: d.soc,
         proximity: +d.proximityScore,
         bin: d.annual_median_wage < 60000 && d.proximityScore > 65 ? 3 : 1,
-        annotate: ['Registered Nurses', 'Lawyers', 'Waiters and Waitresses', 'Retail Salespersons', 'Elementary School Teachers, Except Special Education'].includes(d.occupationTitle),
+        annotate: ['Registered Nurses', 'Lawyers', 'Waiters and Waitresses', 'Elementary School Teachers, Except Special Education'].includes(d.occupationTitle),
       })
     }
   })

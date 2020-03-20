@@ -53,9 +53,6 @@ class App extends React.Component {
 
         <Ad.Dynamic />
 
-        <h3 className='main-sub'> {copy.DemographicsHed} </h3>
-        <p className='main-dek'> {copy.DemographicsDek} </p>
-
 
         <Markdown source={copy.Methodology} className='methodology' linkTarget='_blank' />
 

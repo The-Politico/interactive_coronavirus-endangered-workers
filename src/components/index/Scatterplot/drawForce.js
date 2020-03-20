@@ -17,9 +17,9 @@ class Chart extends BaseChart {
     const frameW = 1000;
     const width = div._groups[0][0].offsetWidth;
     const w = width > frameW ? frameW : width;
-    const p = 40;
-    const h = w * .8;
-    const m = 70;
+    const p = w > 600 ? 40 : 20;
+    const h = w > 600 ? w * .8 : w * 1.4;
+    const m = w > 600 ? 70 : 90;
 
     const svg = div.appendSelect('svg')
       .attr('width', w)
@@ -61,12 +61,12 @@ class Chart extends BaseChart {
 
     svg.appendSelect('text', 'label x1')
       .attr('x', 2 * p)
-      .attr('y', h - 10)
+      .attr('y', w > 600 ? h - 10 : h + 5)
       .text("Low amounts of contact")
 
     svg.appendSelect('text', 'label x2')
       .attr('x', w - p)
-      .attr('y', h - 10)
+      .attr('y', w > 600 ? h - 10 : h + 5)
       .text("High contact")
 
     // Append circles and data
@@ -93,7 +93,7 @@ class Chart extends BaseChart {
       .attr('x', d => xScale(d.proximity))
       .attr('y', d => yScale(d.income) - Math.sqrt(d.population) / m - 5)
       .text(d => d.job.split(', ')[0])
-      .call(wrap, 100)
+      .call(wrap, w > 600 ? 100 : 80)
 
     const titles = svg.selectAll('text.top-layer')
       .data(data.filter(a => a.annotate))
@@ -106,7 +106,7 @@ class Chart extends BaseChart {
       .attr('x', d => xScale(d.proximity))
       .attr('y', d => yScale(d.income) - Math.sqrt(d.population) / m - 5)
       .text(d => d.job.split(', ')[0])
-      .call(wrap, 100)
+      .call(wrap, w > 600 ? 100 : 80)
 
 
     svg.selectAll('circle.data-point').on('mousemove', d => {
