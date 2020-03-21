@@ -15,7 +15,7 @@
     margin: 0 auto;
     overflow: visible;
     //background-color: $button;
-    text.label {
+    .label {
       dominant-baseline: central;
       font-family: $din;
       text-transform: uppercase;
@@ -23,6 +23,10 @@
       font-size: .7rem;
       &.x2 {
         text-anchor: end;
+      }
+
+      &.heavy-zone, &.moderate-zone {
+        opacity: .5;
       }
     }
     .axis {
@@ -41,28 +45,55 @@
         }
       }
     }
+
+    rect.highlight-box {
+      fill: #FFFAB7;
+
+      &.light {
+        opacity: .3
+      }
+
+    }
+
     circle.data-point {
       cursor: pointer;
       @include fill;
       @include stroke;
-      stroke-width: .5px;
-      fill-opacity: .3;
+      @include opacity;
+      stroke-width: 1px;
+      fill-opacity: .75;
       &.selected {
         stroke: black;
         stroke-width: 3px;
-        fill-opacity: .5;
+        opacity: .9;
       }
       &.annotated-true {
         stroke-width: 3px;
-        fill-opacity: .5;
+        opacity: .9
+      }
+      &.hide-annotated-mobile-true {
+        stroke-width: 3px;
+
+        @media screen and (max-width: 600px){
+            stroke-width: .5px;
+        }
       }
     }
     text.data-point {
       text-anchor: middle;
       dominant-baseline: baseline;
       font-family: $din;
-      font-size: .8rem;
+      font-size: .75rem;
       font-weight: bold;
+
+      &.hide-annotated-mobile-true {
+        display: block;
+
+        @media screen and (max-width: 600px){
+          display: none;
+        }
+      }
+
       @media screen and (max-width: 600px){
         font-size: .7rem;
       }

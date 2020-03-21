@@ -26,10 +26,10 @@ class App extends React.Component {
   render() {
     const { copy, timestamp } = this.props;
     const { data } = this.state;
-    //console.log(usResults, stateResults);
 
     return (
       <div>
+        <img src="https://static.politico.com/db/83/e476c9c24c12a19c3da232e61ddb/screen-shot-2020-03-21-at-3.55.54%20PM.png" className='bug'/>
         <Share subject={meta.pageName} shareTweet={content.meta.social.twitter.share_tweet} />
         <Section href={content.section.link}>{content.section.name}</Section>
         <Headline>{copy.Hed}</Headline>
@@ -43,15 +43,14 @@ class App extends React.Component {
 
         <Scatterplot data={data} />
 
-        <Ad.Dynamic />
+        <Markdown source={copy.AboveChartCopy} className='body' linkTarget='_blank' />
 
         <h3 className='main-sub'> {copy.BarsHed} </h3>
         <p className='main-dek'> {copy.BarsDek} </p>
 
         <Table data={data.filter(a => a.bin === 3)} />
-        <Markdown source={copy.DangerZoneCopy} className='body' linkTarget='_blank' />
 
-        <Ad.Dynamic />
+        <Markdown source={copy.BelowChartCopy} className='body' linkTarget='_blank' />
 
 
         <Markdown source={copy.Methodology} className='methodology' linkTarget='_blank' />

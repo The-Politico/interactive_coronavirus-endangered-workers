@@ -1,6 +1,10 @@
-$bin-1: #FFC1AA;
-$bin-2: #E37E61;
-$bin-3: #BD3232;
+$bin-1: #cf6867;
+$bin-2: #cf6867;
+$bin-3: #cf6867;
+
+$bin-1-stroke: #BD3232;
+$bin-2-stroke: #BD3232;
+$bin-3-stroke: #BD3232;
 
 
 @mixin color {
@@ -17,13 +21,13 @@ $bin-3: #BD3232;
 
 @mixin stroke {
   &.bin-1 {
-    stroke: $bin-1;
+    stroke: $bin-1-stroke;
   }
   &.bin-2 {
-    stroke: $bin-2;
+    stroke: $bin-2-stroke;
   }
   &.bin-3 {
-    stroke: $bin-3;
+    stroke: $bin-3-stroke;
   }
 }
 
@@ -48,5 +52,19 @@ $bin-3: #BD3232;
   }
   &.bin-3 {
     background-color: $bin-3;
+  }
+}
+
+@mixin opacity {
+  &.bin-1 {
+    opacity: .2
+  }
+
+  &.bin-2 {
+    opacity: .5
+  }
+
+  &.bin-3 {
+    opacity: .9
   }
 }

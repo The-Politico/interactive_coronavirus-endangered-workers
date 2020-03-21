@@ -7,12 +7,8 @@ class Chart extends BaseChart {
   draw() {
     const data = this.data();
     const node = this.selection().node();
-    // console.log('national', data)
     const div = this.selection().appendSelect('div', 'container');
     const tooltip = div.appendSelect('div', 'tooltip');
-    const key = div.appendSelect('div', 'map-key')
-          .html(`<p><span class='bin-1'></span> Workers who are economically more stable </p>
-          <p><span class='bin-3'></span> Workers in economic danger</p>`)
 
     const frameW = 1000;
     const width = div._groups[0][0].offsetWidth;
@@ -45,6 +41,21 @@ class Chart extends BaseChart {
       .tickSizeInner(-w + 3 * p)
       .ticks(10)
 
+    svg.appendSelect('rect', 'highlight-box')
+      .attr('width', xScale(100) - xScale(75))
+      .attr('height', yScale(0) - yScale(35000))
+      .attr('x', xScale(75))
+      .attr('y', yScale(35000))
+      .classed('highlight-box', true);
+
+      svg.appendSelect('rect', 'highlight-box-light')
+        .attr('width', xScale(100) - xScale(50))
+        .attr('height', yScale(0) - yScale(48000))
+        .attr('x', xScale(50))
+        .attr('y', yScale(48000))
+        .attr('class', 'highlight-box highlight-box-light light');
+
+
     svg.appendSelect('g', 'axis x-axis')
       .attr('transform', `translate(${0}, ${h-p})`)
       .call(xAxis)
@@ -52,6 +63,17 @@ class Chart extends BaseChart {
     svg.appendSelect('g', 'axis y-axis')
       .attr('transform', `translate(${p * 2}, ${0})`)
       .call(yAxis)
+
+    // Add shadey box labels
+    svg.appendSelect('text', 'label moderate-zone')
+      .attr('x', w > 600 ? xScale(56) : xScale(52))
+      .attr('y', w > 600 ? h - 90 : h - 40)
+      .text(w > 600 ? 'Moderately at risk' : 'Moderate');
+
+    svg.appendSelect('text', 'label heavy-zone')
+      .attr('x', w > 600 ? xScale(83) : xScale(82))
+      .attr('y', w > 600 ? h - 90 : h - 40)
+      .text(w > 600 ? 'Most at risk' : 'Heavy');
 
     // Add labels
     svg.appendSelect('text', 'label y')
@@ -76,7 +98,7 @@ class Chart extends BaseChart {
     jobs
       .enter()
       .append('circle')
-      .attr('class', d => `data-point id-${d.id} bin-${d.bin} annotated-${d.annotate}`)
+      .attr('class', d => `data-point id-${d.id} bin-${d.bin} annotated-${d.annotate} hide-annotated-mobile-${d.hideAnnotatedMobile}`)
       .merge(jobs)
       .attr('cx', d => xScale(d.proximity))
       .attr('cy', d => yScale(d.income))
@@ -88,7 +110,7 @@ class Chart extends BaseChart {
     titleShadow
       .enter()
       .append('text')
-      .attr('class', d => `data-point shadow id-${d.id} bin-${d.bin}`)
+      .attr('class', d => `data-point shadow id-${d.id} bin-${d.bin} hide-annotated-mobile-${d.hideAnnotatedMobile}`)
       .merge(titleShadow)
       .attr('x', d => xScale(d.proximity))
       .attr('y', d => yScale(d.income) - Math.sqrt(d.population) / m - 5)
@@ -101,13 +123,12 @@ class Chart extends BaseChart {
     titles
       .enter()
       .append('text')
-      .attr('class', d => `top-layer data-point id-${d.id} bin-${d.bin}`)
+      .attr('class', d => `top-layer data-point id-${d.id} bin-${d.bin} hide-annotated-mobile-${d.hideAnnotatedMobile}`)
       .merge(titles)
       .attr('x', d => xScale(d.proximity))
       .attr('y', d => yScale(d.income) - Math.sqrt(d.population) / m - 5)
       .text(d => d.job.split(', ')[0])
       .call(wrap, w > 600 ? 100 : 80)
-
 
     svg.selectAll('circle.data-point').on('mousemove', d => {
        ReactDOM.render(

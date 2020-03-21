@@ -1,10 +1,35 @@
 import data from 'Data/data.json';
 import { sum } from 'd3';
 
+const incomeCutoff = 35000;
+const proximityCutoff = 75;
+
+
+function determineBin(value) {
+  const [proximity, income] = value;
+  if (income <= 48000) {
+    if (income <= 35000 ) {
+      if (proximity > 50) {
+        if (proximity > 75 ) {
+          return 3
+        }
+        return 2
+      }
+      return 1
+    }
+
+    if (proximity > 50) {
+      return 2
+    }
+    return 1
+  }
+  return 1
+}
+
 export function processData() {
   let dataToUse = [];
   data.forEach(d => {
-    if (+d.total > 100000 && d.annual_median_wage < 160000 ){
+    if (+d.annual_median_wage < 102000 ){
       let bin = Math.floor(d.proximityScore / 25);
       dataToUse.push({
         job: d.occupationTitle,
@@ -12,18 +37,27 @@ export function processData() {
         income: +d.annual_median_wage,
         id: d.soc,
         proximity: +d.proximityScore,
-        bin: d.annual_median_wage < 40000 && d.proximityScore >= 75 ? 3 : 1,
-        annotate: ['Registered Nurses', 'Lawyers', 'Waiters and Waitresses', 'Elementary School Teachers, Except Special Education'].includes(d.occupationTitle),
+        bin: determineBin([d.proximityScore, d.annual_median_wage]),
+        annotate: [
+          'Registered Nurses',
+          'Lawyers',
+          'Cashiers',
+          'Elementary School Teachers, Except Special Education',
+          'Personal Care Aides',
+          'Heavy and Tractor-Trailer Truck Drivers',
+          'Retail Salespersons'
+        ].includes(d.occupationTitle),
+        hideAnnotatedMobile: [
+          'Retail Salespersons',
+          'Personal Care Aides',
+        ].includes(d.occupationTitle),
       })
     }
   })
 
-
-  console.log(dataToUse);
-
-  const danger = data.filter(a => a.annual_median_wage < 40000 && a.proximityScore >= 75);
+  const danger = data.filter(a => a.annual_median_wage <= incomeCutoff && a.proximityScore >= proximityCutoff);
   console.log('danger', sum(danger.map(a => a.total)));
   console.log('total', sum(data.map(a => a.total)));
-
+  console.log(`length of dataset: ${dataToUse.length}`);
   return dataToUse;
 }

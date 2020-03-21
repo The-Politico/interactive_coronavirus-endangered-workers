@@ -1,6 +1,13 @@
 @import '~@politico/interactive-style/theme.scss';
 @import 'Theme/mixins.scss';
 
+img.bug {
+  max-width: 350px;
+  margin: 12px auto;
+  display: block;
+  border: 1px solid #ccc;
+}
+
 div.share {
   margin-bottom: 5px;
   a {
@@ -82,6 +89,19 @@ div.methodology {
  p {
    @media screen and (max-width: 600px){
      padding: 0px 10px;
+   }
+
+   strong {
+     background-color: #FFFAB7;
+     font-family: $din;
+     box-shadow: 0px 1px 2px rgba(0,0,0,.25);
+   }
+
+   em {
+     font-style:normal;
+     font-family: $din;
+     background-color: rgba(255,250,183,.5);
+     box-shadow: 0px 1px 2px rgba(0,0,0,.25);
    }
  }
 

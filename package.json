@@ -14,12 +14,16 @@
     "opinion": false,
     "site": "core",
     "publishPath": "interactives/2020/coronavirus-impact-on-low-income-jobs-by-occupation-chart/",
-    "published": null,
-    "updated": null,
+    "published": "2020-03-21T13:57:53.383Z",
+    "updated": "2020-03-21T20:00:40.697Z",
     "authors": [
       {
         "link": "https://www.twitter.com/beatricezjin",
         "name": "Beatrice Jin"
+      },
+      {
+        "link": "https://www.twitter.com/andrewmcgill",
+        "name": "Andrew McGill"
       }
     ]
   },
@@ -29,7 +33,7 @@
     "d3": "^5.15.0",
     "politico-style": "3.0.16",
     "react": "16.13.0",
-  "react-dom": "16.13.0",
+    "react-dom": "16.13.0",
     "react-helmet": "5.2.1",
     "react-markdown": "4.1.0"
   },
