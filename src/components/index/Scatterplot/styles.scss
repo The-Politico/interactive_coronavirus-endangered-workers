@@ -113,9 +113,8 @@
       display: block;
     }
     @media screen and (max-width: 800px){
-      top: 0 !important;
-      position: sticky;
-      -webkit-position: sticky;
+      top: 0px !important;
+      left: 0px !important;
       pointer-events: none;
     }
   }

@@ -9,8 +9,8 @@ function determineBin(value) {
   const [proximity, income] = value;
   if (income <= 48000) {
     if (income <= 35000 ) {
-      if (proximity > 50) {
-        if (proximity > 75 ) {
+      if (proximity >= 50) {
+        if (proximity >= 75 ) {
           return 3
         }
         return 2
@@ -18,7 +18,7 @@ function determineBin(value) {
       return 1
     }
 
-    if (proximity > 50) {
+    if (proximity >= 50) {
       return 2
     }
     return 1
